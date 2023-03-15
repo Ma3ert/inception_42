@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:buster
 
 EXPOSE 80
 
