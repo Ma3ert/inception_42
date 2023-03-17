@@ -6,7 +6,7 @@
 #    By: Ma3ert <yait-iaz@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/12 08:57:12 by Ma3ert            #+#    #+#              #
-#    Updated: 2023/03/14 07:00:23 by Ma3ert           ###   ########.fr        #
+#    Updated: 2023/03/17 09:57:33 by Ma3ert           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@
 # start mysql (mariadb)
 	&& service mysql start \
 # create database
-	&& mysql -e "CREATE DATABASE wordpress" \
+	&& mysql -e "CREATE DATABASE $DATABASE_NAME" \
 # give the user the priv on the database created and set a pass for the user
-	&& mysql -e "GRANT ALL ON wordpress.* TO 'user'@'localhost' IDENTIFIED BY 'user2010'" \
+	&& mysql -e "GRANT ALL ON wordpress.* TO $DATABASE_USER@'localhost' IDENTIFIED BY $USER_PASSOWRD" \
 # set a password for the root
-	&& mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'root2010'"
+	&& mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY $ROOT_PASSWORD"
