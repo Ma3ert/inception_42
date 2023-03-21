@@ -8,11 +8,11 @@ WORDPRESS = wordpress
 
 all: hoho
 
-hoho: build directory
-	docker-compose up
+hoho: directory
+	docker-compose -f ./srcs/docker-compose.yml up
 
 directory:
-	mkdir /home/login/data/database && mkdir /home/login/data/wordpress
-
+	mkdir -p /home/yait-iaz/data/wordpress
+	mkdir -p /home/yait-iaz/data/database
 clean:
-	dclean && iclean
+	docker system prune -f

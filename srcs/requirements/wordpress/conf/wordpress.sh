@@ -34,4 +34,4 @@ wp config set DB_PASSWORD $DATABASE_PASSWORD --allow-root
 wp config set DB_HOST $DATABASE_HOST --allow-root
 
 # Install wordpress
-wp core install --url=$URL --admin_name=$ADMIN_USERNAME --admin_password=$ADMIN_PASSWORD
+wp core install --title=$TITLE --url=$URL --admin_name=$ADMIN_USERNAME --admin_password=$ADMIN_PASSWORD --allow-root

@@ -1,6 +1,6 @@
 FROM debian:buster
 
-EXPOSE 80
+EXPOSE 443
 
 COPY ./conf/todo.sh ./conf/todo.sh
 

@@ -1,6 +1,6 @@
 server {
-    listen 443 yait-iaz.42.fr default_server;
-    listen [::]:443 yait-iaz.42.fr default_server;
+    listen 443 default_server;
+    listen [::]:443 default_server;
 	ssl_protocols TLSv1.2;
 
     root /var/www/wordpress;

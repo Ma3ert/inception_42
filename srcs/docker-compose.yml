@@ -1,53 +1,44 @@
-version: '1.25'
+version: '3.7'
 
 networks:
   app-net:
-
-volumes:
-  database:
-    source: /home/yait-iaz/data/database
-
-  source_file:
-    source: /home/yait-iaz/data/wordpress
+    name: app-net
 
 services:
   nginx:
-    build: ./nginx/Dockerfile
-    networks: app-net
-    port:
-      -"443:443"
-    expose:
-      -"9000"
+    container_name: nginx
+    build: ./requirements/nginx
+    networks:
+      - app-net
     volumes:
-      -source_file:
-        type: bind
-        target: /var/www/wordpress
-
-  mariadb:
-    build: ./mariadb/Dockerfile
-    networks: app-net
+      - /home/yait-iaz/data/wordpress:/var/www/wordpress
+    ports:
+      - "443:443"
     expose:
-      -"3306"
+      - "9000"
+  
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariaDB
+    networks:
+      - app-net
+    volumes: 
+      - /home/yait-iaz/data/database:/var/lib/mysql
+    expose:
+      - "3306"
     env_file:
       - .env
-    volumes:
-      -database:
-        type: bind
-        target: /home/yait-iaz/data/database
-
+  
   wordpress:
-    build: ./wordpress/Dockerfile
-    networks: app-net
-    expose:
-      -"3306"
-      -"9000"
+    container_name: wordpress
+    build: ./requirements/wordpress
+    networks:
+      - app-net
     volumes:
-      -database:
-        type: bind
-        target: /var/www/database
-      -source_file:
-        type: bind
-        target: /var/www/wordpress
+      - /home/yait-iaz/data/wordpress:/var/www/wordpress
+    expose:
+      - "3306"
+      - "9000"
     depends_on:
       - nginx
       - mariadb
