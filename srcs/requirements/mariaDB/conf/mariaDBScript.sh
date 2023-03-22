@@ -11,3 +11,6 @@
 	mysql -e "FLUSH PRIVILEGES;"
 # set a password for the root
 	mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$ROOT_PASSWORD';"
+
+exec "$@"
+

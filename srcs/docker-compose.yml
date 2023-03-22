@@ -5,21 +5,25 @@ networks:
     name: app-net
 
 services:
-  nginx:
-    container_name: nginx
-    build: ./requirements/nginx
-    networks:
-      - app-net
-    volumes:
-      - /home/yait-iaz/data/wordpress:/var/www/wordpress
-    ports:
-      - "443:443"
-    expose:
-      - "9000"
+#   nginx:
+#     container_name: nginx
+#     build: ./requirements/nginx
+#     image: nginx
+#     networks:
+#       - app-net
+#     depends_on:
+#       - wordpress
+#     volumes:
+#       - /home/yait-iaz/data/wordpress:/var/www/wordpress
+#     ports:
+#       - "443:443"
+#     expose:
+#       - "9000"
   
   mariadb:
     container_name: mariadb
     build: ./requirements/mariaDB
+    image: mariadb
     networks:
       - app-net
     volumes: 
@@ -29,18 +33,18 @@ services:
     env_file:
       - .env
   
-  wordpress:
-    container_name: wordpress
-    build: ./requirements/wordpress
-    networks:
-      - app-net
-    volumes:
-      - /home/yait-iaz/data/wordpress:/var/www/wordpress
-    expose:
-      - "3306"
-      - "9000"
-    depends_on:
-      - nginx
-      - mariadb
-    env_file:
-      - .env
+  # wordpress:
+  #   container_name: wordpress
+  #   build: ./requirements/wordpress
+  #   image: wordpress
+  #   networks:
+  #     - app-net
+  #   volumes:
+  #     - /home/yait-iaz/data/wordpress:/var/www/wordpress
+  #   expose:
+  #     - "3306"
+  #     - "9000"
+  #   depends_on:
+  #     -  mariadb
+  #   env_file:
+  #     - .env

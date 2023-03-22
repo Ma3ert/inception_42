@@ -1,14 +1,5 @@
 #!/bin/sh
 
-# Update apt-get
-apt-get update
-
-# Install curl
-apt-get install -y curl
-
-# Install php
-apt-get install php7.3-fpm -y
-
 # Using curl to get wp-cli
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar
 
@@ -22,16 +13,20 @@ service php7.3-fpm start
 wp core download --allow-root && cat wp-config-sample.php > wp-config.php && chmod +x wp-config.php
 
 # Set database name
-wp config set DB_NAME $DATABASE_NAME --allow-root
+# echo "set db name"
+# wp config set DB_NAME $DATABASE_NAME --allow-root
 
-# Set database username
-wp config set DB_USER $DATABASE_USER --allow-root
+# # Set database username
+# echo "set db user"
+# wp config set DB_USER $DATABASE_USER --allow-root
 
-# Set passoword for database username
-wp config set DB_PASSWORD $DATABASE_PASSWORD --allow-root
+# # Set passoword for database username
+# echo "set db password"
+# wp config set DB_PASSWORD $USER_PASSWORD --allow-root
 
-# Set database hostname
-wp config set DB_HOST $DATABASE_HOST --allow-root
+# # Set database hostname
+# echo "set db hostname"
+# wp config set DB_HOST $DATABASE_HOST --allow-root
 
-# Install wordpress
-wp core install --title=$TITLE --url=$URL --admin_name=$ADMIN_USERNAME --admin_password=$ADMIN_PASSWORD --allow-root
+# # Install wordpress
+# wp core install --title=$TITLE --url=$URL --admin_name=$ADMIN_USERNAME --admin_password=$ADMIN_PASSWORD --allow-root
