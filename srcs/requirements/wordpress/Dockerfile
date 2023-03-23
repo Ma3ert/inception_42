@@ -6,7 +6,7 @@ COPY ./conf/wordpress.sh /bin/wordpress.sh
 RUN apt-get update
 
 # Install curl & php-fpm
-RUN apt-get install -y curl php7.3-fpm && chmod +x /bin/wordpress.sh
+RUN apt-get install -y curl php7.3-fpm php php-curl php-mysql && chmod +x /bin/wordpress.sh
 
 WORKDIR /var/www/wordpress
 
