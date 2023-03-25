@@ -9,10 +9,17 @@ WORDPRESS = wordpress
 all: hoho
 
 hoho: directory
-	docker-compose -f ./srcs/docker-compose.yml up
+	docker-compose -f ./srcs/docker-compose.yml up --build
 
 directory:
-	mkdir -p /home/yait-iaz/data/wordpress
-	mkdir -p /home/yait-iaz/data/database
+	sudo mkdir -p /home/yait-iaz/data/wordpress
+	sudo mkdir -p /home/yait-iaz/data/database
+down:
+	docker-compose -f ./srcs/docker-compose.yml down
+
 clean:
-	docker system prune -f
+	docker system prune --all --force --volumes
+	docker network prune --force
+	docker volume prune --force
+	docker volume rm $$(docker volume ls -q)
+	sudo rm -rf /home/yait-iaz/data/*

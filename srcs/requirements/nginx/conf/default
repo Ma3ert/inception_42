@@ -4,7 +4,7 @@ server {
 	ssl_protocols TLSv1.2;
 
     root /var/www/wordpress;
-    index .php index.html index.htm index.nginx-debian.html;
+    index index.php index.html index.htm index.nginx-debian.html;
 
     server_name _;
     location / {
@@ -12,10 +12,14 @@ server {
     }
 	# pass PHP scripts on Nginx to FastCGI (PHP-FPM) server
   	location ~ \.php$ {
-    	include snippets/fastcgi-php.conf;
-    	# Nginx php-fpm sock config:
-    	fastcgi_pass wordpress:9000;
-  	}
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass wordpress:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+	fastcgi_param PATH_INFO $fastcgi_path_info;
+	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
 
 	# deny access to Apache .htaccess on Nginx with PHP, 
 	# if Apache and Nginx document roots concur
