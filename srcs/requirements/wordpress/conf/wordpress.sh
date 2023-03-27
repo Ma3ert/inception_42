@@ -6,8 +6,8 @@ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.pha
 # Move the file
 mv wp-cli.phar /usr/local/bin/wp
 
-# Start php7.3-fpm 
-# service php7.3-fpm start
+# A condition to check if wordpress is already there
+if [ ! -f /var/www/wordpress/wp-config-sample.php ]; then
 
 # Download wordpress & create wordpress config file
 wp core download --allow-root && cat wp-config-sample.php > wp-config.php && chmod +x wp-config.php
@@ -26,5 +26,9 @@ wp config set DB_HOST $DATABASE_HOST --allow-root
 
 # Install wordpress
 wp core install --title=$TITLE --url=$URL --admin_name=$ADMIN_USERNAME --admin_password=$ADMIN_PASSWORD --admin_email=$EMAIL --skip-email --allow-root
+
+wp user create $WP_USER $WP_USER_MAIL --user_pass=$WP_USER_PASS --role=author --allow-root
+
+fi
 
 exec "$@"

@@ -12,4 +12,4 @@ RUN apt-get -y install mariadb-server && chmod +x ./conf/mariaDBScript.sh
 # Run the script in the container
 ENTRYPOINT [ "./conf/mariaDBScript.sh" ]
 
-CMD [ "mysqld_safe" ]
+CMD [ "mysqld" ]
