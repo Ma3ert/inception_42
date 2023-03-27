@@ -14,6 +14,7 @@ hoho: directory
 directory:
 	sudo mkdir -p /home/yait-iaz/data/wordpress
 	sudo mkdir -p /home/yait-iaz/data/database
+
 down:
 	docker-compose -f ./srcs/docker-compose.yml down
 
