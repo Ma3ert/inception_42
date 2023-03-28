@@ -29,7 +29,8 @@ wp core install --title=$TITLE --url=$URL --admin_name=$ADMIN_USERNAME --admin_p
 
 wp user create $WP_USER $WP_USER_MAIL --user_pass=$WP_USER_PASS --role=author --allow-root
 
-wp theme install neve --activate --allow-root
+# wp theme install neve --activate --allow-root
+wp theme install zeever --path=/var/www/wordpress  --activate --allow-root
 
 fi
 
