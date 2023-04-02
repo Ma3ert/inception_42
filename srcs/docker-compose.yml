@@ -35,6 +35,18 @@ services:
       - .env
     restart: unless-stopped
 
+  redis:
+    container_name: redis
+    build: ./requirements/bonus/redis
+    image: redis
+    networks:
+      - app-net
+    expose:
+      - "6379"
+    env_file:
+      - .env
+    restart: unless-stopped
+
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress
@@ -47,7 +59,8 @@ services:
       - "3306"
       - "9000"
     depends_on:
-      -  mariadb
+      - mariadb
+      - redis
     env_file:
       - .env
     restart: unless-stopped

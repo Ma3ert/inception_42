@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # start mysql (mariadb)
-	service mysql start
+	/etc/init.d/mysql start
 	sed -i "s/127.0.0.1/0.0.0.0/g" /etc/mysql/mariadb.conf.d/50-server.cnf
 # create database
 	mysql -u root -p$ROOT_PASSWORD -e "CREATE DATABASE IF NOT EXISTS $DATABASE_NAME;"
