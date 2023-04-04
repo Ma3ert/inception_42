@@ -47,6 +47,22 @@ services:
       - .env
     restart: unless-stopped
 
+  ftp-server:
+    container_name: ftp-server
+    build: ./requirements/bonus/ftp-server
+    image: ftp-server
+    networks:
+      - app-net
+    volumes:
+      - wordpress:/home/pop/ftp/files
+    ports:
+      - "21:21" #data
+      - "20:20" #active
+      - "40000-40005:40000-40005" #passive
+    env_file:
+      - .env
+    restart: unless-stopped
+
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress
