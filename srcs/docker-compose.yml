@@ -53,8 +53,27 @@ services:
     image: adminer
     networks:
       - app-net
+    ports:
+      - 8000:8000
     env_file:
       - .env
+    restart: unless-stopped
+
+  cadvisor:
+    container_name: cadvisor
+    build: ./requirements/bonus/cadvisor
+    image: cadvisor
+    networks:
+      - app-net
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+    volumes:
+        - /:/rootfs:ro
+        - /var/run:/var/run:rw
+        - /sys:/sys:ro
+        - /var/lib/docker/:/var/lib/docker:ro
     restart: unless-stopped
 
   ftp-server:
