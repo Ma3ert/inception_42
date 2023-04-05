@@ -47,6 +47,16 @@ services:
       - .env
     restart: unless-stopped
 
+  adminer:
+    container_name: adminer
+    build: ./requirements/bonus/adminer
+    image: adminer
+    networks:
+      - app-net
+    env_file:
+      - .env
+    restart: unless-stopped
+
   ftp-server:
     container_name: ftp-server
     build: ./requirements/bonus/ftp-server
