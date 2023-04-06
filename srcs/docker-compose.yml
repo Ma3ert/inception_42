@@ -35,6 +35,24 @@ services:
       - .env
     restart: unless-stopped
 
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    image: wordpress
+    networks:
+      - app-net
+    volumes:
+      - wordpress:/var/www/wordpress
+    expose:
+      - "3306"
+      - "9000"
+    depends_on:
+      - mariadb
+      - redis
+    env_file:
+      - .env
+    restart: unless-stopped
+
   redis:
     container_name: redis
     build: ./requirements/bonus/redis
@@ -91,21 +109,15 @@ services:
     env_file:
       - .env
     restart: unless-stopped
-
-  wordpress:
-    container_name: wordpress
-    build: ./requirements/wordpress
-    image: wordpress
+  
+  static-website:
+    container_name: static-website
+    build: ./requirements/bonus/static-website
+    image: static-website
     networks:
       - app-net
-    volumes:
-      - wordpress:/var/www/wordpress
-    expose:
-      - "3306"
-      - "9000"
-    depends_on:
-      - mariadb
-      - redis
+    ports:
+      - "80:80"
     env_file:
       - .env
     restart: unless-stopped
